@@ -77,6 +77,41 @@ func (q *Queue) Peek() interface{} {
 	}
 }
 
+type IStack interface {
+	Size() int
+	Push(interface{})
+	Pop() interface{}
+}
+
+type Stack struct {
+	size  int
+	first *Node
+}
+
+func (s *Stack) Size() int {
+	return s.size
+}
+
+func (s *Stack) Push(data interface{}) {
+	if s.Size() == 0 {
+		s.first = CreateNode(data, nil)
+	} else {
+		s.first = CreateNode(data, s.first)
+	}
+	s.size++
+}
+
+func (s *Stack) Pop() interface{} {
+	if s.Size() == 0 {
+		return nil
+	} else {
+		data := s.first.Data
+		s.first = s.first.Next
+		s.size--
+		return data
+	}
+}
+
 func main() {
 	list := CreateNode(1, CreateNode("banana", CreateNode(3.0, nil)))
 	PrintNode(list)
@@ -90,4 +125,15 @@ func main() {
 	var queue IQueue
 	queue = q
 	fmt.Printf("%v\n", queue)
+
+	s := new(Stack)
+	s.size = 0
+	s.first = nil
+	for i := 0; i < 10; i++ {
+		s.Push(i)
+	}
+
+	for s.Size() > 0 {
+		fmt.Println("pop ", s.Pop())
+	}
 }
