@@ -49,7 +49,7 @@ func qsortUtil(data Data, left, right int, wg *sync.WaitGroup) {
 	//go qsortUtil(data, left, p-1, &wg2)
 	//go qsortUtil(data, p+1, right, &wg2)
 	//wg2.Wait()
-
+	wg.Add(2)
 	go qsortUtil(data, left, p-1, wg)
 	go qsortUtil(data, p+1, right, wg)
 }
