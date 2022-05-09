@@ -38,7 +38,7 @@ func (p *Philosopher) eat() {
 	}
 	defer p.right.lock.Unlock()
 	fmt.Printf("%s is start eating\n", p.name)
-	//time.Sleep(time.Millisecond * 100)
+	time.Sleep(time.Millisecond * 100)
 	fmt.Printf("%s is done eating\n", p.name)
 	return
 }
@@ -65,11 +65,11 @@ func main() {
 		ps = append(ps, p)
 	}
 
-	count = 2
+	count = 5
 	for i := 0; i < num; i++ {
 		go func(i int) {
 			for {
-				time.Sleep(time.Millisecond * 30)
+				time.Sleep(time.Millisecond * 100)
 				ps[i].eat()
 			}
 		}(i)
