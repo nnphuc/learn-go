@@ -1,6 +1,7 @@
 package num
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -23,5 +24,11 @@ func TestNum(t *testing.T) {
 	typ := reflect.TypeOf(value)
 	if typ.Name() != "int" {
 		t.Error("got unexpected type")
+	}
+}
+
+func Test_Fib(t *testing.T) {
+	for i := 0; i < 10; i++ {
+		fmt.Printf("%v\n", Fib(i))
 	}
 }
